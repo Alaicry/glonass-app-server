@@ -1,13 +1,33 @@
-import express from 'express'
 
-const app = express()
 
-app.listen(5000, () => {
-	console.log('Сервер запустился на 5000 порту');
-})
 
-app.post('/', async (req, res) => {
-	console.log(req);
-	console.log(res);
-	return res.json({ egts: 'test' });
-})
+
+import { log } from 'console';
+import net from 'net'
+
+const server = net.createServer((socket) => {
+	console.log('Клиент подключился');
+
+	socket.on('data', (data) => {
+		console.log(`Данные: ${data.toString('hex')}`);
+		// Ваш код обработки принятых данных здесь
+		console.log(data.toString('hex').length);
+		socket.write(data)
+	});
+
+
+	socket.on('end', () => {
+		console.log('Клиент отключился');
+	});
+
+	socket.on('error', (err) => {
+		console.error(`Ошибка: ${err.message}`);
+	});
+});
+
+const PORT = 5000;
+const HOST = '127.0.0.1';
+
+server.listen(PORT, HOST, () => {
+	console.log(`Сервер запустился на ${HOST}:${PORT}`);
+});
