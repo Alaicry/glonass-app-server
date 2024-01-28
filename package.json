@@ -5,11 +5,8 @@
 	"type": "module",
 	"main": "app.ts",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "ts-node-dev --exit-child ./src/app.ts",
-		"start": "npx tsc -p tsconfig.json && node build/app.js",
-		"startJS": "concurrently \"npx tsc --watch\" \"nodemon build/app.js\"",
-		"devJS": "nodemon app.js"
+		"dev": "nodemon app.js",
+		"build": "app.js"
 	},
 	"keywords": [],
 	"author": "",
